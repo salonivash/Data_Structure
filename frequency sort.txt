@@ -1,0 +1,36 @@
+import java.util.*;
+public class Solution {
+        public  static ArrayList<Integer> frequencySort(ArrayList<Integer> list) {
+     HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for(int i=0;i<list.size();i++)
+        {
+            map.put(list.get(i),map.getOrDefault(list.get(i),0)+1);
+        }
+        Collections.sort(list,(n1,n2)->{
+            int freq1=map.get(n1);
+            int freq2=map.get(n2);
+            if(freq1!=freq2)
+            {
+                return freq2- freq1;
+            }
+            return n1-n2;
+        });
+        return list;
+        }
+	public static void main (String[] args) {
+	    Scanner sc= new Scanner(System.in);
+		int N=sc.nextInt();
+		
+	  ArrayList <Integer>A= new ArrayList<Integer>(N);
+		while(sc.hasNextInt())
+		{   int i=sc.nextInt();
+		    A.add(i);
+		   
+		}
+		ArrayList res=frequencySort(A);
+		
+		System.out.println(res);
+	}
+}
+//Time Complexity:O(NlogN)
+//Space Compexity:O(N)

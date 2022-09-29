@@ -1,0 +1,51 @@
+import java.io.*;
+import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+
+class Solution{
+    private static void swap(int[] arr, int i, int j) {
+		int temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+   
+
+    public static int minSwaps(int [] arr)
+    { int count=0;
+    int [] temp=Arrays.copyOfRange(arr,0,arr.length);
+    Arrays.sort(temp);
+    HashMap<Integer,Integer> map= new HashMap<Integer,Integer>();
+    for(int i=0;i<arr.length;i++)
+    {
+        map.put(arr[i],i);
+    }
+    for(int i=0;i<arr.length;i++)
+    {
+        if(arr[i]!=temp[i])
+        { count++;
+        int diff=arr[i];
+        swap(arr,i,map.get(temp[i]));
+        map.put(diff,map.get(temp[i]));
+        map.put(temp[i],i);
+        }
+    }
+    return count;
+     
+        
+    }
+	public static void main (String[] args) {
+	    Scanner sc= new Scanner(System.in);
+	    int N=sc.nextInt();
+	    int [] arr=new int[N];
+	    for(int i=0;i<N;i++)
+	    {
+             int j=sc.nextInt();
+             arr[i]=j;
+	    }
+	    int res=minSwaps(arr);
+		System.out.println(res);
+	}
+}
+//Time Complexity:O(N)
+//Space Complexity:O(N)
